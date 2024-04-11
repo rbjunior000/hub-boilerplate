@@ -1,0 +1,20 @@
+import { forwardRef } from 'react'
+import type { Ref, PropsWithChildren } from 'react'
+import { {{pascalCase name}} as Mui{{pascalCase name}} } from '@mui/material'
+
+type {{pascalCase name}}Props = {
+}
+
+const Base{{pascalCase name}} = (props: PropsWithChildren<{{pascalCase name}}Props>, ref: Ref<any>) => {
+  const { {{#if hasChildren}}children, {{/if}}...rest } = props
+
+  return (
+    <Mui{{pascalCase name}} ref={ref} {...rest}>
+      {{#if hasChildren}}
+        {children} 
+      {{/if}}
+    </Mui{{pascalCase name}}>
+  )
+}
+
+export const {{pascalCase name}} = forwardRef(Base{{pascalCase name}})
