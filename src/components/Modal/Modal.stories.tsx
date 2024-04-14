@@ -9,8 +9,15 @@ export default {
   component: Modal,
 } as Meta<typeof Modal>
 
+const ModalExample = (
+  <>
+    <Modal.Body>CustomModalBoddy</Modal.Body>
+    <Modal.Footer>CustomModalFoter</Modal.Footer>
+  </>
+)
+
 const Template: StoryFn<typeof Modal> = () => (
-  <Button onClick={() => openModal({ children: 'apsdkpaodk' })}>Open modal</Button>
+  <Button onClick={() => openModal({ children: ModalExample, title: 'Titulo' })}>Open modal</Button>
 )
 
 export const Default = Template.bind({})

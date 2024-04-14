@@ -1,58 +1,40 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
-import type { PropsWithChildren } from 'react'
-import { forwardRef, useState } from 'react'
-import { LoadingButton } from '@mui/lab'
-import { ModalStore, closeModal } from './modal-store'
+import {
+  Dialog,
+  DialogActions,
+  DialogActionsProps,
+  DialogContent,
+  DialogContentProps,
+  DialogTitle,
+  DialogTitleProps,
+} from '@mui/material'
+import React from 'react'
 
-const BaseModal = (props: PropsWithChildren<ModalStore>) => {
-  function isPromises(obj: any) {
-    return (
-      !!obj &&
-      (typeof obj === 'object' || typeof obj === 'function') &&
-      typeof obj.then === 'function'
-    )
-  }
-
-  const [loading, setLoading] = useState(false)
-  const isPromise = isPromises(props.confirm)
-  const handleCancel = () => {
-    closeModal()
-  }
-
-  const handleOk = async () => {
-    setLoading(true)
-    try {
-      if (props.confirm) {
-        await props.confirm()
-      }
-    } catch (error) {
-      console.error('An error occurred:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return (
-    <Dialog
-      sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
-      maxWidth="xs"
-      open={props.isOpen}
-    >
-      <DialogTitle>{props.title}</DialogTitle>
-      <DialogContent dividers>
-        {JSON.stringify(isPromise)}
-        {props.children}
-      </DialogContent>
-      <DialogActions>
-        <Button autoFocus onClick={handleCancel}>
-          Cancel
-        </Button>
-        <LoadingButton loading={loading} onClick={handleOk}>
-          Salvar
-        </LoadingButton>
-      </DialogActions>
-    </Dialog>
-  )
+export type ModalProps = {
+  isOpen?: boolean
+  title?: string
+  onClose?: () => void
+  children?: React.ReactNode
 }
 
-export const Modal = forwardRef(BaseModal)
+export const Modal = (props: ModalProps) => (
+  <Dialog
+    open={!!props.isOpen}
+    onClose={() => {
+      props.onClose && props.onClose()
+    }}
+  >
+    {props.title && <Modal.Title>{props.title}</Modal.Title>}
+    {props.children}
+  </Dialog>
+)
+
+const ModalTitle = (props: DialogTitleProps) => <DialogTitle {...props} />
+
+const ModalBody = (props: DialogContentProps) => <DialogContent dividers {...props} />
+
+const ModalFooter = (props: DialogActionsProps) => <DialogActions {...props} />
+
+Modal.Body = ModalBody
+Modal.Title = ModalTitle
+
+Modal.Footer = ModalFooter

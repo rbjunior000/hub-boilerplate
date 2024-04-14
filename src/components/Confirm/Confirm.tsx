@@ -1,48 +1,42 @@
 import { LoadingButton } from '@mui/lab'
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogProps,
-  DialogTitle,
-} from '@mui/material'
+import { Button, DialogProps } from '@mui/material'
 import type { PropsWithChildren } from 'react'
 import { useState } from 'react'
 import { ButtonProps } from '../Button'
-import { closeModal } from '../Modal/modal-store'
+import { Modal } from '../Modal'
 
 export type ConfirmModalProps = {
-  isOpen: boolean
-  title: string
+  isOpen?: boolean
+  title?: string
   confirm?: () => void
   closeModal?: () => void
   confirmText?: string
   cancelText?: string
-  confirmButtonProps: Omit<ButtonProps, 'children' | 'onClick'>
-  cancelButtonProps: Omit<ButtonProps, 'children' | 'onClick'>
-  modalProps: Omit<DialogProps, 'open'>
+  confirmButtonProps?: Omit<ButtonProps, 'children' | 'onClick'>
+  cancelButtonProps?: Omit<ButtonProps, 'children' | 'onClick'>
+  modalProps?: Omit<DialogProps, 'open'>
   onSuccess?: () => void
   onError?: (error: any) => void
+  onClose?: () => void
+  formId?: string
 }
 
-const BaseConfirmModal = (props: PropsWithChildren<Partial<ConfirmModalProps>>) => {
+const BaseConfirmModal = (props: PropsWithChildren<ConfirmModalProps>) => {
   const {
     cancelButtonProps,
     confirmButtonProps,
-    isOpen,
-    modalProps,
-    title,
     cancelText,
     children,
     confirm,
     confirmText,
     onError = () => {},
     onSuccess = () => {},
+    onClose = () => {},
+    formId,
   } = props
   const [loading, setLoading] = useState(false)
   const handleCancel = () => {
-    closeModal && closeModal()
+    onClose()
   }
 
   const handleOk = async () => {
@@ -50,7 +44,6 @@ const BaseConfirmModal = (props: PropsWithChildren<Partial<ConfirmModalProps>>) 
     try {
       if (confirm) {
         await confirm()
-        // closeModal && closeModal()
         onSuccess()
       }
     } catch (error) {
@@ -61,15 +54,14 @@ const BaseConfirmModal = (props: PropsWithChildren<Partial<ConfirmModalProps>>) 
   }
 
   return (
-    <Dialog open={!!isOpen} {...(modalProps || {})}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent dividers>{children}</DialogContent>
-      <DialogActions>
+    <>
+      <Modal.Body>{children}</Modal.Body>
+      <Modal.Footer>
         <Button autoFocus onClick={handleCancel} {...(cancelButtonProps || {})}>
           {cancelText || 'Cancelar'}
         </Button>
         <LoadingButton
-          form="formId"
+          form={formId}
           loading={loading}
           onClick={handleOk}
           variant="contained"
@@ -77,8 +69,8 @@ const BaseConfirmModal = (props: PropsWithChildren<Partial<ConfirmModalProps>>) 
         >
           {confirmText || 'Salvar'}
         </LoadingButton>
-      </DialogActions>
-    </Dialog>
+      </Modal.Footer>
+    </>
   )
 }
 

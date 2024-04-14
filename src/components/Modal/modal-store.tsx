@@ -1,18 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import { create } from 'zustand'
-import type { ConfirmModalProps } from '../Confirm'
+import { Confirm } from '../Confirm'
+import type { ConfirmModalProps, ModalProps } from '@/components'
 
-export type ModalStore = {
-  isOpen: boolean
-  title?: string
-  confirm?: () => void
-  children?: string | React.ReactNode
-  close?: () => void
-}
+export const useModalStore = create<Record<string, ModalProps>>(() => ({}))
 
-export const useModalStore = create<Record<string, ModalStore>>(() => ({}))
-
-export function openModal(props: Partial<ModalStore>): string {
+export function openModal(props: Partial<ModalProps>): string {
   const currentState = useModalStore.getState()
 
   if (!Object.keys(currentState).length) {
@@ -40,7 +33,18 @@ export function openModal(props: Partial<ModalStore>): string {
 export const confirm = (
   confirmModalProps: PropsWithChildren<Partial<ConfirmModalProps>>
 ): string => {
-  const id = openModal(confirmModalProps)
+  const id = openModal({
+    ...confirmModalProps,
+    children: (
+      <Confirm
+        {...confirmModalProps}
+        onClose={() => {
+          confirmModalProps.onClose && confirmModalProps.onClose()
+          closeModal()
+        }}
+      />
+    ),
+  })
   return id
 }
 
