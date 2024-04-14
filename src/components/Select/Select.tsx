@@ -13,7 +13,7 @@ type MenuItemProps = {
   label: string
 }
 
-type SelectProps = {
+export type SelectProps = {
   options: MenuItemProps[]
   value?: string
   onChange?: (value: string) => void
@@ -21,6 +21,8 @@ type SelectProps = {
   label?: string
   placeholder?: string
   fullWidth?: boolean
+  error?: boolean
+  helperText?: string
 }
 
 const BaseSelect = (props: PropsWithChildren<SelectProps>, ref: Ref<any>) => {

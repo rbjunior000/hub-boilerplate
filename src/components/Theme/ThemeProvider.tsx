@@ -1,16 +1,16 @@
-import { ThemeProvider as MuiThemeProvider, ThemeOptions } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
-import { createContext, useEffect, useMemo, useState } from 'react'
-import { useMediaQuery } from '@mui/material'
 import { useLocalStorage } from '@mantine/hooks'
-import { theme as HubTheme } from './theme'
+import { useMediaQuery } from '@mui/material'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider as MuiThemeProvider, Theme } from '@mui/material/styles'
+import { createContext, useEffect, useMemo, useState } from 'react'
 import { useWatch } from '@/hooks'
+import { theme as HubTheme } from './theme'
 
 type ColorMode = 'light' | 'dark'
 
 export type ThemeContextProps = {
   toggleMode: () => void
-  theme: ThemeOptions
+  theme: Theme
   handleChangeColor: (value: boolean) => void
 }
 

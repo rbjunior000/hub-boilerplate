@@ -1,9 +1,8 @@
 import { addons } from '@storybook/preview-api'
 import React, { useEffect } from 'react'
-import { IconButton, Providers } from '../src/components'
-import { useModalStore } from '../src/components/Modal/modal-store'
-import { useTheme } from '../src/hooks/useTheme'
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode'
+import { Providers } from '../src/components'
+import { useTheme } from '../src/hooks/useTheme'
 
 const channel = addons.getChannel()
 

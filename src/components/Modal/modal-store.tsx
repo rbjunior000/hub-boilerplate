@@ -30,9 +30,7 @@ export function openModal(props: Partial<ModalProps>): string {
   return modalAddedKey || '1'
 }
 
-export const confirm = (
-  confirmModalProps: PropsWithChildren<Partial<ConfirmModalProps>>
-): string => {
+export const confirm = (confirmModalProps: PropsWithChildren<ConfirmModalProps>) => {
   const id = openModal({
     ...confirmModalProps,
     children: (

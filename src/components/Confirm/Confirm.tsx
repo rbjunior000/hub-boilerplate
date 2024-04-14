@@ -29,14 +29,14 @@ const BaseConfirmModal = (props: PropsWithChildren<ConfirmModalProps>) => {
     children,
     confirm,
     confirmText,
-    onError = () => {},
-    onSuccess = () => {},
-    onClose = () => {},
+    onError,
+    onSuccess,
+    onClose,
     formId,
   } = props
   const [loading, setLoading] = useState(false)
   const handleCancel = () => {
-    onClose()
+    onClose?.()
   }
 
   const handleOk = async () => {
@@ -44,10 +44,10 @@ const BaseConfirmModal = (props: PropsWithChildren<ConfirmModalProps>) => {
     try {
       if (confirm) {
         await confirm()
-        onSuccess()
+        onSuccess?.()
       }
     } catch (error) {
-      onError(error)
+      onError?.(error)
     } finally {
       setLoading(false)
     }
