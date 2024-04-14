@@ -75,3 +75,10 @@ export const updateModal = (
     },
   })
 }
+
+export const modals = {
+  open: openModal,
+  confirm,
+  close: closeModal,
+  update: updateModal,
+}

@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form'
+import { useController, useFormContext } from 'react-hook-form'
 import { Select, SelectProps } from '../Select'
 
 type SelectInputProps = {
@@ -6,9 +6,9 @@ type SelectInputProps = {
   options: SelectProps['options']
 }
 export const SelectInput = ({ name, options }: SelectInputProps) => {
-  const { register, formState } = useFormContext()
+  const { formState, control } = useFormContext()
 
-  const field = register(name)
+  const { field } = useController({ name, control })
 
   return (
     <Select

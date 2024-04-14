@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from '@mui/material'
+import { FormGroup, FormHelperText, InputAdornment, TextField } from '@mui/material'
 import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { IconButton } from '../IconButton'
@@ -12,18 +12,20 @@ export const PasswordInput = ({ name }: PasswordInputProps) => {
   const { register, formState } = useFormContext()
 
   return (
-    <TextField
-      {...register(name)}
-      error={!!formState.errors[name]}
-      helperText={formState.errors[name]?.message?.toString()}
-      type={show ? 'password' : 'text'}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton iconName={show ? 'EyeOff' : 'Eye'} onClick={() => setShow(!show)} />
-          </InputAdornment>
-        ),
-      }}
-    />
+    <FormGroup>
+      <TextField
+        {...register(name)}
+        error={!!formState.errors[name]}
+        type={show ? 'password' : 'text'}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton iconName={show ? 'EyeOff' : 'Eye'} onClick={() => setShow(!show)} />
+            </InputAdornment>
+          ),
+        }}
+      />
+      <FormHelperText>{formState.errors[name]?.message?.toString()}</FormHelperText>
+    </FormGroup>
   )
 }

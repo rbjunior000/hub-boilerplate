@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 import { Button } from './Button'
 
 export default {
@@ -7,6 +8,7 @@ export default {
   args: {
     children: 'Button example',
     variant: 'contained',
+    onClick: action('clicked'),
   },
 } as Meta<typeof Button>
 

@@ -1,9 +1,11 @@
+/* eslint-disable import/no-cycle */
 import { LoadingButton } from '@mui/lab'
 import { Button, DialogProps } from '@mui/material'
 import type { PropsWithChildren } from 'react'
 import { useState } from 'react'
 import { ButtonProps } from '../Button'
 import { Modal } from '../Modal'
+import { modals } from '../Modal/modal-store'
 
 export type ConfirmModalProps = {
   isOpen?: boolean
@@ -44,6 +46,7 @@ const BaseConfirmModal = (props: PropsWithChildren<ConfirmModalProps>) => {
     try {
       if (confirm) {
         await confirm()
+        modals.close()
         onSuccess?.()
       }
     } catch (error) {

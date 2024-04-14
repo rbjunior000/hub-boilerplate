@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode'
 import { Providers } from '../src/components'
 import { useTheme } from '../src/hooks/useTheme'
+import { Box } from '@mui/material'
 
 const channel = addons.getChannel()
 
@@ -22,7 +23,16 @@ export const decorators = [
     return (
       <Providers>
         <ColorSchemeWrapper>{renderStory()}</ColorSchemeWrapper>
-        {renderStory()}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
+        >
+          {renderStory()}
+        </Box>
       </Providers>
     )
   },

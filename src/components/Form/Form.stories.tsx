@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 import { Button } from '../Button'
 import { Form } from './Form'
 import { z } from '@/utils'
@@ -7,14 +8,13 @@ export default {
   title: 'Components/Form',
   component: Form,
   args: {
-    onSubmit: (values) => {
-      console.log({ values })
-    },
+    onSubmit: action('submited'),
     defaultValues: {
       name: 'aopdkapodk@gmail.com',
+      option: '',
     },
   },
-} as Meta<typeof Form<{ name: string; date: string }>>
+} as Meta<typeof Form<{ name: string; select: string }>>
 
 const schema = z.object({
   group: z.array(z.string()),

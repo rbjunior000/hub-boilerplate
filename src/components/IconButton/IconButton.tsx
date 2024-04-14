@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import type { Ref, PropsWithChildren } from 'react'
-import {  IconButton as MuiIconButton, Tooltip, TooltipProps } from '@mui/material'
+import { IconButton as MuiIconButton, Tooltip, TooltipProps } from '@mui/material'
 import { Icon, IconProps } from '../Icon'
 
 type IconButtonProps = {
@@ -12,13 +12,13 @@ type IconButtonProps = {
 }
 
 const BaseIconButton = (props: PropsWithChildren<IconButtonProps>, ref: Ref<any>) => {
-  const { ...rest } = props
+  const { iconName, ...rest } = props
 
   if (props.tooltip) {
     return (
       <Tooltip title={props.tooltip} {...(props.tooltipProps || {})}>
         <MuiIconButton {...rest}>
-          <Icon name={props.iconName} {...rest.iconProps} />
+          <Icon name={iconName} {...rest.iconProps} />
         </MuiIconButton>
       </Tooltip>
     )

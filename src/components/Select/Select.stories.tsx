@@ -13,6 +13,7 @@ export default {
     placeholder: 'Select an option',
     label: 'select',
     fullWidth: true,
+    value: '',
   },
 } as Meta<typeof Select>
 
