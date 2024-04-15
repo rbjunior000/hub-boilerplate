@@ -16,5 +16,4 @@ export * from './Theme'
 export * from './Confirm'
 export * from './TextField'
 export * from './Form'
-export * from './Checkbox'
 /* PLOP_INJECT_EXPORT */
