@@ -2,17 +2,17 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import ModalProvider from '../Modal/ModalProvider'
 import { ThemeProvider } from '../Theme'
 import { Toast } from '../Toast'
-import DateFnsProvider from './DateProvider'
+import { DateProvider } from './DateProvider'
 import '@/utils/zod'
 
 export const Providers = ({ children }: any) => (
   <AppRouterCacheProvider>
-    <DateFnsProvider>
+    <DateProvider>
       <ThemeProvider>
         <ModalProvider />
         <Toast />
         {children}
       </ThemeProvider>
-    </DateFnsProvider>
+    </DateProvider>
   </AppRouterCacheProvider>
 )
