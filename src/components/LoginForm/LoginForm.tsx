@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SubmitHandler } from 'react-hook-form'
 
 type LoginInput = {
@@ -10,4 +11,4 @@ export type LoginProps = {
   defaultValues?: LoginInput
 }
 
-export const LoginForm = ({ onSubmit, defaultValues }: LoginProps) => <></>
+export const LoginForm = (props: LoginProps) => <></>

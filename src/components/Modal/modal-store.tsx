@@ -1,7 +1,5 @@
-import React, { PropsWithChildren } from 'react'
 import { create } from 'zustand'
-import { Confirm } from '../Confirm'
-import type { ConfirmModalProps, ModalProps } from '@/components'
+import type { ModalProps } from './Modal'
 
 export const useModalStore = create<Record<string, ModalProps>>(() => ({}))
 
@@ -30,22 +28,6 @@ export function openModal(props: Partial<ModalProps>): string {
   return modalAddedKey || '1'
 }
 
-export const confirm = (confirmModalProps: PropsWithChildren<ConfirmModalProps>) => {
-  const id = openModal({
-    ...confirmModalProps,
-    children: (
-      <Confirm
-        {...confirmModalProps}
-        onClose={() => {
-          confirmModalProps.onClose && confirmModalProps.onClose()
-          closeModal()
-        }}
-      />
-    ),
-  })
-  return id
-}
-
 export function closeModal(): void {
   const currentState = useModalStore.getState()
   if (currentState) {
@@ -57,10 +39,7 @@ export function closeModal(): void {
   }
 }
 
-export const updateModal = (
-  id: string,
-  props: PropsWithChildren<Partial<ConfirmModalProps>>
-): void => {
+export const updateModal = (id: string, props: any): void => {
   const currentState = useModalStore.getState()
 
   if (!currentState[id]) {
@@ -78,7 +57,6 @@ export const updateModal = (
 
 export const modals = {
   open: openModal,
-  confirm,
   close: closeModal,
   update: updateModal,
 }

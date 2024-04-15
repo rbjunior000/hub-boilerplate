@@ -14,7 +14,7 @@ export * from './Toast'
 export * from './Providers'
 export * from './Theme'
 export * from './Confirm'
-export * from './TextField';
-export * from './Form';
-export * from './Checkbox';
+export * from './TextField'
+export * from './Form'
+export * from './Checkbox'
 /* PLOP_INJECT_EXPORT */

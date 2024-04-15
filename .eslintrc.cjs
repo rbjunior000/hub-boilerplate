@@ -15,5 +15,6 @@ module.exports = {
     'import/extensions': 'off',
     "semi": "off",
     "@typescript-eslint/semi": "off",
+    "import/no-cycle": "off",
   },
 }

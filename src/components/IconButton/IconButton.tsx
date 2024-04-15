@@ -8,7 +8,7 @@ type IconButtonProps = {
   iconProps?: Omit<IconProps, 'name'>
   tooltip?: string
   tooltipProps?: Omit<Omit<TooltipProps, 'title'>, 'children'>
-  onClick: (e: any) => void
+  onClick?: (e: any) => void
 }
 
 const BaseIconButton = (props: PropsWithChildren<IconButtonProps>, ref: Ref<any>) => {

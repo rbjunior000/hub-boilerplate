@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@/test-utils'
 import { Dropdown, DropdownItem } from './Dropdown'
+import { IconButton } from '../IconButton'
 
 const onClickLogout = jest.fn()
 
@@ -28,7 +29,11 @@ const items: DropdownItem[] = [
 
 describe('Dropdown component', () => {
   it('renders the dropdown menu with correct items', () => {
-    render(<Dropdown items={items} icon="AArrowDown" />)
+    render(
+      <Dropdown items={items}>
+        {({ onToggle }) => <IconButton onClick={onToggle} iconName="AArrowDown" />}
+      </Dropdown>
+    )
 
     expect(screen.getByLabelText('dropdown-icon-trigger')).toBeInTheDocument()
 
@@ -40,7 +45,11 @@ describe('Dropdown component', () => {
   })
 
   it('calls onClick when an item without href is clicked', () => {
-    render(<Dropdown items={items} icon="AArrowDown" />)
+    render(
+      <Dropdown items={items}>
+        {({ onToggle }) => <IconButton onClick={onToggle} iconName="AArrowDown" />}
+      </Dropdown>
+    )
 
     fireEvent.click(screen.getByLabelText('dropdown-icon-trigger'))
     fireEvent.click(screen.getByText('Logout'))
@@ -49,7 +58,11 @@ describe('Dropdown component', () => {
   })
 
   it('navigates to the correct href when an item with href is clicked', async () => {
-    render(<Dropdown items={items} icon="AArrowDown" />)
+    render(
+      <Dropdown items={items}>
+        {({ onToggle }) => <IconButton onClick={onToggle} iconName="AArrowDown" />}
+      </Dropdown>
+    )
 
     fireEvent.click(screen.getByLabelText('dropdown-icon-trigger'))
     const link = screen.getByRole('menuitem', { name: 'Profile' })

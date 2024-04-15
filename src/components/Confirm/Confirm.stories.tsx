@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/react'
 import { PropsWithChildren } from 'react'
 import { action } from '@storybook/addon-actions'
 import { Button } from '../Button'
-import { confirm } from '../Modal/modal-store'
+import { confirm } from '..'
 import { Confirm, ConfirmModalProps } from './Confirm'
 import { Typography } from '../Typography'
 

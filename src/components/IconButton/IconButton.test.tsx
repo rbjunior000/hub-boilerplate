@@ -5,7 +5,7 @@ import { IconButton } from './IconButton'
 
 describe('IconButton', () => {
   it('renders without crashing', () => {
-    render(<IconButton iconName='AArrowDown' />)
+    render(<IconButton iconName="AArrowDown" />)
     expect(true).toBe(true)
   })
 })
